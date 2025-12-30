@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Exame de Consciência Católica</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1c1f27",
+                        "surface-light": "#ffffff",
+                        "border-dark": "#2a3441",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: "Public Sans", sans-serif;
+            min-height: 100vh;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background-color: rgba(156, 163, 175, 0.5); border-radius: 20px; }
+        /* Smooth Details Summary */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        .animate-rotate { transition: transform 0.3s ease; }
+        details[open] summary .animate-rotate { transform: rotate(180deg); }
+        /* Checkbox Custom */
+        .checkbox-custom:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+    <!-- React Dependencies -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/history@5/umd/history.development.js"></script>
+    <script src="https://unpkg.com/react-router@6.3.0/umd/react-router.development.js"></script>
+    <script src="https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+
+<body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-white transition-colors duration-200">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // --- Setup ---
+        const { useState, useEffect } = React;
+        const { createRoot } = ReactDOM;
+        const { MemoryRouter, Routes, Route, Link, useNavigate, useLocation } = ReactRouterDOM;
+
+        // --- Components ---
+
+        // Screen 1: Home
+        const HomePage = () => {
+            return (
+                <div className="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden pb-20">
+                    <header className="flex items-center justify-between p-4 pb-2 bg-background-light dark:bg-background-dark sticky top-0 z-10">
+                        <div className="flex flex-col">
+                            <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Bem-vindo</span>
+                            <h2 className="text-2xl font-bold leading-tight tracking-[-0.015em]">Paz e bem</h2>
+                        </div>
+                        <Link to="/settings" className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 dark:bg-[#1c1f27] text-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-[#282e39] transition-colors">
+                            <span className="material-symbols-outlined">settings</span>
+                        </Link>
+                    </header>
+                    <main className="flex flex-col gap-4">
+                        <div className="px-4 pt-2 w-full @container">
+                            <div className="flex flex-col items-stretch justify-start rounded-xl overflow-hidden shadow-sm bg-white dark:bg-[#1c1f27] border border-gray-100 dark:border-none transition-colors">
+                                <div className="w-full bg-center bg-no-repeat h-40 bg-cover relative" style={{backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBE5v9k0vm-euOUdgDeMiuib5XsPcrXuUDs58Y-G72rUib1G3elPm3Z69XjfAoSbN43qaubpznIZTYbk3j1PKEWCwSwUFhcyMkr9BmIs_mWPfxMBSw3hMh4xRwf0lmes4m8BYp5WRjCPOSr1pyHOj3IMnSEt0j2Yp_JYEvmcvRzTvMRzev0tC0i82bitCwsv0p_Mza2b6mC6QhxMkv9c0WbwSvcEu0WVPZ1HPHbdMNaOWK2TbgllYr2hz_JNEWWXQx8Z-paRHrNizc")'}}>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                    <div className="absolute bottom-3 left-4">
+                                        <span className="inline-block px-2 py-1 rounded-md bg-white/20 backdrop-blur-md text-xs font-bold text-white mb-1 border border-white/10">Liturgia Diária</span>
+                                    </div>
+                                </div>
+                                <div className="flex w-full flex-col gap-3 p-5">
+                                    <div className="flex justify-between items-start">
+                                        <div>
+                                            <p className="text-primary text-sm font-semibold tracking-wide uppercase mb-1">1 João 1:9</p>
+                                            <h3 className="text-lg font-bold leading-tight">Versículo do Dia</h3>
+                                        </div>
+                                        <button className="text-gray-400 hover:text-primary transition-colors">
+                                            <span className="material-symbols-outlined">share</span>
+                                        </button>
+                                    </div>
+                                    <p className="text-gray-600 dark:text-[#9da6b9] text-base font-normal leading-relaxed italic">
+                                        "Se confessarmos os nossos pecados, ele é fiel e justo para perdoar os nossos pecados e nos purificar de toda injustiça."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="px-4 py-2 w-full">
+                            <Link to="/select-guide" className="group w-full flex items-center justify-between overflow-hidden rounded-xl h-16 px-6 bg-primary shadow-lg shadow-primary/30 text-white hover:bg-primary/90 transition-all active:scale-[0.98]">
+                                <div className="flex items-center gap-3">
+                                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20">
+                                        <span className="material-symbols-outlined">play_circle</span>
+                                    </div>
+                                    <div className="flex flex-col items-start">
+                                        <span className="text-base font-bold leading-none">Iniciar Exame</span>
+                                        <span className="text-xs text-blue-100 mt-1 font-medium">Consciência e Reflexão</span>
+                                    </div>
+                                </div>
+                                <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            </Link>
+                        </div>
+                        <div className="px-4">
+                            <h3 className="text-base font-bold mb-3 px-1">Acesso Rápido</h3>
+                            <div className="grid grid-cols-2 gap-3">
+                                <Link to="/notes" className="relative flex flex-col justify-end p-4 h-32 rounded-xl overflow-hidden group text-left shadow-sm">
+                                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBQMvjak7Aty6wpWkNGV3_Fc4fD89tS0_KwZ-EhoXrgxISP_BJb3uH_8lJrZ4kB7qDLK82-5W2lXkbZLo9gY7Y1FSTmYRnpFRklHIYQAg6-R8OftS-aKeSGiZCJMoCbTgyIIiyYeL90OjCF3LHQayJUNgp7dmk15B_vt4-YoEZ9pDhDS6ECShQ4ess-XZvBygtxlLcrcnfqeq9Vq5yOPchMyS5Zovla1nEyLds7Q0Dy7_D1RGfLrSq2cFNZfOPbUUysAHRbdMOZxMo")'}}></div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10"></div>
+                                    <div className="relative z-10 flex flex-col gap-1">
+                                        <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-1 text-white">
+                                            <span className="material-symbols-outlined text-[20px]">edit_note</span>
+                                        </div>
+                                        <span className="text-white text-sm font-bold leading-tight">Minhas Notas</span>
+                                    </div>
+                                </Link>
+                                <Link to="/report" className="relative flex flex-col justify-end p-4 h-32 rounded-xl overflow-hidden group text-left shadow-sm">
+                                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBnH1_P4Zt1n6rX5YSuh1o81OJcRbowWJ-ORH1JboqeFZ_Ss2SfXpGc9yAFvs9S7ylT8XFkXJqNiAkO8ZhpM3VPOK54SbApMM9m-GroANw0MsAB5K_4TlQuDqnSfBbg6Pz9Fgcu07FovLAcZjwzSqvoQZqjsPeel14yi9ikuaQhuZ91Xjz1SDr_v-QZs0QjcCAhURL56w3WCh1s6EZ4LUDEvVpT7lZq2ziQ60LeA80u311UzWnqxQhV5L8mhwmkI9MhXPBpli2NDdg")'}}></div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10"></div>
+                                    <div className="relative z-10 flex flex-col gap-1">
+                                        <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-1 text-white">
+                                            <span className="material-symbols-outlined text-[20px]">bar_chart</span>
+                                        </div>
+                                        <span className="text-white text-sm font-bold leading-tight">Meu Relatório</span>
+                                    </div>
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="h-8"></div>
+                    </main>
+                    <BottomNav active="home" />
+                </div>
+            );
+        };
+
+        // Screen 2: Select Guide
+        const SelectGuide = () => {
+            const navigate = useNavigate();
+            return (
+                <div className="relative flex h-full min-h-screen w-full flex-col bg-background-light dark:bg-background-dark text-[#111318] dark:text-white font-display overflow-x-hidden antialiased">
+                    <div className="sticky top-0 z-50 flex items-center bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md p-4 pb-2 justify-between border-b border-[#e5e7eb] dark:border-[#29303d]">
+                        <button onClick={() => navigate(-1)} className="text-[#111318] dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                            <span className="material-symbols-outlined text-[24px]">close</span>
+                        </button>
+                        <h2 className="text-[#111318] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10">Exame de Consciência</h2>
+                    </div>
+                    <main className="flex-1 flex flex-col w-full max-w-md mx-auto">
+                        <div className="px-5 pt-8 pb-4">
+                            <h3 className="text-[#111318] dark:text-white tracking-tight text-3xl font-bold leading-tight text-left pb-3">Escolha um guia</h3>
+                            <p className="text-[#637588] dark:text-[#9da6b9] text-base font-normal leading-relaxed text-left">
+                                Para realizar uma boa confissão, examine sua vida à luz da Palavra de Deus. Selecione um dos caminhos abaixo para iniciar sua reflexão.
+                            </p>
+                        </div>
+                        <div className="flex flex-col gap-6 px-4 pb-12 mt-2">
+                            <div className="@container">
+                                <Link to="/exam-ten-commandments" className="group flex flex-col items-stretch justify-start rounded-2xl shadow-sm hover:shadow-md transition-shadow bg-surface-light dark:bg-surface-dark overflow-hidden border border-[#e5e7eb] dark:border-transparent">
+                                    <div className="relative w-full aspect-video overflow-hidden">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                                        <div className="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-105 transition-transform duration-500" style={{backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAr4AtqCrY9F2lzx8vGMvOt7sHr6UusRtkanx3aIy4NWN6iaMI1f1W3g-1BrKz-X5bMlV3OKxskfsAsvfXxZ1RtJYaGZW2jtfcie7EdG6OhZsYwCa8ix-qYnaIsxO75XXPlzyaBg_Yq3kWXU52ZNvi0VEyRg27UTCJp5vn1IFkVCEakT0A00dOAaW4dfBfwq40camwdcyFg-AVkmJdqV-E8m9cqCnM3saoptEWt3VMChCR0f4oXS5tAxCf80ugxwkpIYzbb8_LEjBE")'}}></div>
+                                        <div className="absolute bottom-3 left-4 z-20">
+                                            <span className="inline-flex items-center justify-center rounded-full bg-primary/90 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm">Clássico</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex w-full grow flex-col gap-3 p-5">
+                                        <div className="flex items-start justify-between gap-4">
+                                            <div>
+                                                <h4 className="text-[#111318] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-1">Os Dez Mandamentos</h4>
+                                                <p className="text-[#637588] dark:text-[#9da6b9] text-sm font-normal leading-normal">
+                                                    Baseado na Lei Divina entregue a Moisés. Um guia completo sobre o amor a Deus e ao próximo.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="pt-2 mt-auto">
+                                            <button className="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-primary hover:bg-primary/90 active:scale-[0.98] transition-all text-white text-base font-bold leading-normal shadow-[0_1px_2px_rgba(0,0,0,0.1)]">
+                                                <span className="material-symbols-outlined mr-2 text-[20px]">play_arrow</span>
+                                                <span className="truncate">Iniciar Exame</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="@container">
+                                <Link to="/exam-church-commandments" className="group flex flex-col items-stretch justify-start rounded-2xl shadow-sm hover:shadow-md transition-shadow bg-surface-light dark:bg-surface-dark overflow-hidden border border-[#e5e7eb] dark:border-transparent">
+                                    <div className="relative w-full aspect-video overflow-hidden">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                                        <div className="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-105 transition-transform duration-500" style={{backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCuGlid8T4R29MgmMjQVGZoDj9fGACuN-DuW-NB8GUVntrirYecQpk3zFEFNh5nlY_tqNeaiO3WS5Ni1CynKppcm772L2NFWA--g5SFE0r4lQAMVSTdrqn-1pSDgWSM7QmTyDMOObWlWaarVEaouRoOk1o7FbGPleNFXAe7mHWjc2OYap2JhZnu0iQoc_98RG5DifUpUYY1IOrraVk5B9CrGc57FCwA5YjQa4GpnLN2aKfK4-bwQ2cOvyl3PLmGGi7C8uUF9ASNZwc")'}}></div>
+                                        <div className="absolute bottom-3 left-4 z-20">
+                                            <span className="inline-flex items-center justify-center rounded-full bg-purple-600/90 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm">Eclesial</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex w-full grow flex-col gap-3 p-5">
+                                        <div className="flex items-start justify-between gap-4">
+                                            <div>
+                                                <h4 className="text-[#111318] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-1">Mandamentos da Igreja</h4>
+                                                <p className="text-[#637588] dark:text-[#9da6b9] text-sm font-normal leading-normal">
+                                                    Os cinco preceitos fundamentais que garantem aos fiéis o mínimo indispensável na oração e esforço moral.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="pt-2 mt-auto">
+                                            <button className="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-[#1c1f27] dark:bg-[#2a2e38] hover:bg-gray-200 dark:hover:bg-[#343a46] border border-[#e5e7eb] dark:border-transparent active:scale-[0.98] transition-all text-[#111318] dark:text-white text-base font-bold leading-normal">
+                                                <span className="material-symbols-outlined mr-2 text-[20px]">church</span>
+                                                <span className="truncate">Iniciar Exame</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="flex justify-center pb-8 mt-auto">
+                            <button className="text-sm font-medium text-[#637588] dark:text-[#9da6b9] hover:text-primary dark:hover:text-primary transition-colors flex items-center gap-1">
+                                <span className="material-symbols-outlined text-[18px]">history</span>
+                                Ver histórico de confissões
+                            </button>
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        // Screen 3: Detail Exam (Mocking 7th Commandment view)
+        const ExamDetail = () => {
+             const navigate = useNavigate();
+             return (
+                <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-x-hidden antialiased">
+                    <header className="sticky top-0 z-50 flex items-center justify-between bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur-md px-4 py-3 border-b border-slate-200 dark:border-slate-800 transition-colors">
+                        <div onClick={() => navigate(-1)} className="flex size-10 shrink-0 items-center justify-center rounded-full active:bg-slate-100 dark:active:bg-slate-800 cursor-pointer text-slate-900 dark:text-white">
+                            <span className="material-symbols-outlined">arrow_back</span>
+                        </div>
+                        <h2 className="text-lg font-bold leading-tight tracking-tight flex-1 text-center text-slate-900 dark:text-white">VII. Não roubarás</h2>
+                        <div className="flex size-10 items-center justify-center">
+                            <span className="material-symbols-outlined text-slate-400 dark:text-slate-500 cursor-pointer">help</span>
+                        </div>
+                    </header>
+                    <main className="flex-1 flex flex-col gap-6 p-4 pb-32">
+                        <div className="flex flex-col gap-3">
+                            <div className="flex justify-between items-end">
+                                <p className="text-sm font-semibold text-slate-900 dark:text-white">Progresso</p>
+                                <p className="text-xs font-medium text-slate-500 dark:text-slate-400">3 de 10 itens marcados</p>
+                            </div>
+                            <div className="h-2 w-full rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                                <div className="h-full rounded-full bg-primary transition-all duration-500 ease-out" style={{width: '30%'}}></div>
+                            </div>
+                        </div>
+                        <div className="relative overflow-hidden rounded-xl bg-slate-900 shadow-lg group">
+                            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{backgroundImage: 'linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.2) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCwul_ubTPIfSw6MoetXy4kGe0DZwmJWCUU9yRafZ-q7IFXEOzn072659NKQqCqHrXCJ84GVd6EdZOE0cq4oyTnWPVAdab73fq6SpU3Yr6fm6XWUmZ6Ekhh89qQWR4NztuN-N-61-Ae9x5b6RZ14J7uNHxKoFPjnZls13VwB0R4OMEnN4bzb3pI9o9L29B8sZOCfRlECKVi8LB33T4DjQBu-kl2jSpQlXTcAvKKoWYdtHPHIy1lkjFBPNmZ2a-qnKue8GSXw-3-kXs")'}}></div>
+                            <div className="relative flex flex-col justify-end p-6 pt-32 h-full">
+                                <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm w-fit">
+                                    <span className="material-symbols-outlined text-[14px]">auto_stories</span>
+                                    Reflexão
+                                </div>
+                                <h3 className="text-2xl font-bold leading-tight text-white mb-2">Honestidade e Justiça</h3>
+                                <p className="text-sm leading-relaxed text-slate-200">
+                                    Reflita sobre a honestidade em suas ações e o respeito pela propriedade alheia. Considere não apenas o furto material, mas também a justiça em suas relações.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white px-1">Perguntas Reflexivas</h3>
+                            {/* Question 1 */}
+                            <div className="group flex flex-col rounded-xl bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-all hover:border-primary/50 dark:hover:border-primary/50">
+                                <div className="flex items-start gap-4 p-4">
+                                    <div className="pt-1"><input className="size-6 rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary/20 dark:focus:ring-offset-slate-900 transition-colors cursor-pointer" type="checkbox"/></div>
+                                    <div className="flex-1 flex flex-col gap-1">
+                                        <p className="text-base font-medium text-slate-900 dark:text-white leading-snug">Roubei algo de alguém?</p>
+                                        <p className="text-sm text-slate-500 dark:text-slate-400">Toque para adicionar nota pessoal...</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center justify-between px-4 pb-4 pt-0">
+                                    <button className="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors"><span className="material-symbols-outlined text-[18px]">edit_note</span><span>Anotar</span></button>
+                                    <div className="flex items-center gap-3 bg-slate-100 dark:bg-slate-800/50 rounded-lg p-1">
+                                        <button className="flex size-8 items-center justify-center rounded bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-200 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors"><span className="material-symbols-outlined text-sm font-bold">remove</span></button>
+                                        <span className="w-4 text-center text-sm font-semibold tabular-nums text-slate-900 dark:text-white">1</span>
+                                        <button className="flex size-8 items-center justify-center rounded bg-white dark:bg-slate-700 text-primary shadow-sm hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors"><span className="material-symbols-outlined text-sm font-bold">add</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Question 2 */}
+                             <div className="group flex flex-col rounded-xl bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-all hover:border-primary/50 dark:hover:border-primary/50">
+                                <div className="flex items-start gap-4 p-4">
+                                    <div className="pt-1"><input className="size-6 rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary/20 dark:focus:ring-offset-slate-900 transition-colors cursor-pointer" type="checkbox"/></div>
+                                    <div className="flex-1 flex flex-col gap-1">
+                                        <p className="text-base font-medium text-slate-900 dark:text-white leading-snug">Fui desonesto em negócios ou trapaceei?</p>
+                                        <p className="text-sm text-slate-500 dark:text-slate-400">Toque para adicionar nota pessoal...</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center justify-between px-4 pb-4 pt-0">
+                                    <button className="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors"><span className="material-symbols-outlined text-[18px]">edit_note</span><span>Anotar</span></button>
+                                    <div className="flex items-center gap-3 bg-slate-100 dark:bg-slate-800/50 rounded-lg p-1">
+                                         <button className="flex size-8 items-center justify-center rounded bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-200 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors"><span className="material-symbols-outlined text-sm font-bold">remove</span></button>
+                                        <span className="w-4 text-center text-sm font-semibold tabular-nums text-slate-900 dark:text-white">0</span>
+                                        <button className="flex size-8 items-center justify-center rounded bg-white dark:bg-slate-700 text-primary shadow-sm hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors"><span className="material-symbols-outlined text-sm font-bold">add</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="h-8"></div>
+                    </main>
+                    <div className="fixed bottom-0 left-0 w-full bg-surface-light dark:bg-surface-dark border-t border-slate-200 dark:border-slate-800 px-4 py-4 pb-safe z-40 backdrop-blur-xl bg-opacity-95 dark:bg-opacity-95">
+                        <div className="flex gap-3">
+                            <button onClick={() => navigate(-1)} className="flex-1 flex items-center justify-center gap-2 h-12 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold text-base hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                <span className="material-symbols-outlined">chevron_left</span> Anterior
+                            </button>
+                            <Link to="/report" className="flex-[2] flex items-center justify-center gap-2 h-12 rounded-lg bg-primary text-white font-bold text-base shadow-lg shadow-primary/25 hover:bg-blue-600 transition-colors">
+                                Salvar Reflexão <span className="material-symbols-outlined">check</span>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+             );
+        };
+
+        // Screen 4: Notes
+        const NotesPage = () => {
+             const navigate = useNavigate();
+             return (
+                <div className="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden pb-20 bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-200">
+                    <div className="sticky top-0 z-20 flex items-center bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md p-4 pb-2 justify-between border-b border-slate-200 dark:border-slate-800">
+                        <h2 className="text-xl font-bold leading-tight tracking-[-0.015em] flex-1 text-slate-900 dark:text-white">Minhas Notas</h2>
+                        <div className="flex items-center gap-4">
+                            <button className="flex items-center justify-center text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors"><span className="material-symbols-outlined">visibility_off</span></button>
+                            <Link to="/settings" className="flex items-center justify-center text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors"><span className="material-symbols-outlined">settings</span></Link>
+                        </div>
+                    </div>
+                    <div className="px-4 py-3 sticky top-[60px] z-10 bg-background-light dark:bg-background-dark">
+                        <label className="flex flex-col h-12 w-full">
+                            <div className="flex w-full flex-1 items-stretch rounded-lg h-full shadow-sm">
+                                <div className="text-slate-400 flex border-none bg-surface-light dark:bg-surface-dark items-center justify-center pl-4 rounded-l-lg border-r-0"><span className="material-symbols-outlined">search</span></div>
+                                <input className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-surface-light dark:bg-surface-dark focus:border-none h-full placeholder:text-slate-400 px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Buscar nas notas..." />
+                            </div>
+                        </label>
+                    </div>
+                    <div className="flex gap-3 px-4 py-1 overflow-x-auto no-scrollbar pb-4">
+                        <button className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary pl-4 pr-4 shadow-md shadow-primary/20"><p className="text-white text-sm font-medium leading-normal">Todas</p></button>
+                        <button className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 hover:border-primary/50 pl-4 pr-4 transition-all"><p className="text-slate-600 dark:text-slate-300 text-sm font-medium leading-normal">4º Mandamento</p></button>
+                        <button className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 hover:border-primary/50 pl-4 pr-4 transition-all"><p className="text-slate-600 dark:text-slate-300 text-sm font-medium leading-normal">7º Mandamento</p></button>
+                    </div>
+                    <div className="flex flex-col gap-4 px-4 py-2">
+                         <div className="group flex flex-col gap-3 bg-surface-light dark:bg-surface-dark p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 hover:border-primary/30 dark:hover:border-primary/30 transition-all cursor-pointer">
+                            <div className="flex justify-between items-start">
+                                <div className="flex items-center gap-2"><span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300">4º Mandamento</span><span className="text-xs text-slate-400">Ontem</span></div>
+                                <button className="text-slate-400 hover:text-primary transition-colors"><span className="material-symbols-outlined text-xl">more_horiz</span></button>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <div className="flex flex-1 flex-col justify-center gap-1">
+                                    <h3 className="text-slate-900 dark:text-white text-lg font-semibold leading-tight">Impaciência no trabalho</h3>
+                                    <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-relaxed line-clamp-2">Perdi a calma com um colega durante a reunião de segunda-feira...</p>
+                                </div>
+                            </div>
+                        </div>
+                         <div className="group flex flex-col gap-3 bg-surface-light dark:bg-surface-dark p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 hover:border-primary/30 dark:hover:border-primary/30 transition-all cursor-pointer">
+                            <div className="flex justify-between items-start">
+                                <div className="flex items-center gap-2"><span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300">8º Mandamento</span><span className="text-xs text-slate-400">Terça-feira</span></div>
+                                <button className="text-slate-400 hover:text-primary transition-colors"><span className="material-symbols-outlined text-xl">more_horiz</span></button>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <div className="flex flex-1 flex-col justify-center gap-1">
+                                    <h3 className="text-slate-900 dark:text-white text-lg font-semibold leading-tight">Mentira pequena</h3>
+                                    <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-relaxed line-clamp-2">Disse que estava ocupado para não atender uma ligação...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="fixed bottom-24 right-6 z-30">
+                        <button className="flex items-center justify-center w-14 h-14 bg-primary rounded-full shadow-lg shadow-primary/40 hover:scale-105 active:scale-95 transition-transform duration-200 group">
+                            <span className="material-symbols-outlined text-white text-3xl group-hover:rotate-90 transition-transform duration-300">add</span>
+                        </button>
+                    </div>
+                    <BottomNav active="exam" />
+                </div>
+             );
+        };
+
+        // Screen 5: Report
+        const ReportPage = () => {
+             const navigate = useNavigate();
+             return (
+                <div className="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark font-display">
+                    <div className="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-50 border-b border-gray-200 dark:border-[#282e39]">
+                        <div className="flex items-center gap-3">
+                            <button onClick={() => navigate(-1)} className="text-gray-900 dark:text-white p-2 -ml-2 rounded-full hover:bg-gray-200 dark:hover:bg-[#282e39] transition-colors"><span className="material-symbols-outlined">arrow_back</span></button>
+                            <h2 className="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Relatório de Exame</h2>
+                        </div>
+                        <div className="flex items-center justify-end gap-2">
+                             <button className="flex items-center justify-center rounded-lg h-10 w-10 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-[#282e39] transition-colors"><span className="material-symbols-outlined">ios_share</span></button>
+                        </div>
+                    </div>
+                    <div className="flex-1 flex flex-col p-4 gap-6">
+                        <div><p className="text-gray-500 dark:text-[#9da6b9] text-sm">Aqui está o resumo do seu exame de consciência realizado em 24 de Outubro.</p></div>
+                        <div className="flex flex-col items-start justify-between gap-4 rounded-xl border border-gray-200 dark:border-[#3b4354] bg-white dark:bg-[#1c212b] p-4 shadow-sm">
+                            <div className="flex items-center justify-between w-full">
+                                <div className="flex flex-col gap-1">
+                                    <div className="flex items-center gap-2"><span className="material-symbols-outlined text-primary text-xl">visibility_off</span><p className="text-gray-900 dark:text-white text-base font-bold leading-tight">Modo Privacidade</p></div>
+                                    <p className="text-gray-500 dark:text-[#9da6b9] text-xs font-normal leading-normal">Ocultar detalhes sensíveis na tela</p>
+                                </div>
+                                <label className="relative flex h-[28px] w-[48px] cursor-pointer items-center rounded-full border-none bg-gray-300 dark:bg-[#282e39] p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-colors duration-200">
+                                    <div className="h-[24px] w-[24px] rounded-full bg-white shadow-sm transition-all"></div>
+                                    <input className="invisible absolute" type="checkbox"/>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <h2 className="text-gray-900 dark:text-white text-[20px] font-bold leading-tight tracking-[-0.015em] pb-3">Para Confessar</h2>
+                            <div className="bg-white dark:bg-[#1c212b] rounded-xl border border-gray-200 dark:border-[#3b4354] overflow-hidden shadow-sm">
+                                <div className="flex items-start justify-between p-4 border-b border-gray-100 dark:border-[#282e39]">
+                                    <div className="flex items-start gap-3"><div className="mt-0.5 h-2 w-2 rounded-full bg-red-500 shrink-0"></div><div className="flex flex-col"><p className="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">Faltei com a caridade</p><p className="text-gray-500 dark:text-[#9da6b9] text-xs mt-1">Discussão acalorada com familiares.</p></div></div>
+                                    <span className="inline-flex items-center rounded-full bg-red-500/10 dark:bg-red-500/20 px-2 py-0.5 text-xs font-medium text-red-600 dark:text-red-400">3x</span>
+                                </div>
+                                <div className="flex items-start justify-between p-4 border-b border-gray-100 dark:border-[#282e39]">
+                                    <div className="flex items-start gap-3"><div className="mt-0.5 h-2 w-2 rounded-full bg-orange-500 shrink-0"></div><div className="flex flex-col"><p className="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">Julguei o próximo</p></div></div>
+                                    <span className="inline-flex items-center rounded-full bg-orange-500/10 dark:bg-orange-500/20 px-2 py-0.5 text-xs font-medium text-orange-600 dark:text-orange-400">2x</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="col-span-2 bg-gradient-to-br from-primary/20 to-primary/5 dark:from-primary/20 dark:to-[#1c212b] rounded-xl p-4 border border-primary/20 flex items-center justify-between">
+                                <div><p className="text-primary text-xs font-bold uppercase tracking-wider mb-1">Maior Luta</p><h3 className="text-gray-900 dark:text-white text-xl font-bold">Soberba</h3><p className="text-gray-500 dark:text-[#9da6b9] text-xs mt-1">Identificado em 45% das faltas</p></div>
+                                <div className="bg-primary/20 p-3 rounded-full"><span className="material-symbols-outlined text-primary text-2xl">psychology</span></div>
+                            </div>
+                        </div>
+                         <div className="h-20"></div>
+                    </div>
+                     <div className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background-light via-background-light to-transparent dark:from-background-dark dark:via-background-dark dark:to-transparent max-w-md mx-auto">
+                        <button className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-primary/30 transition-all active:scale-[0.98]">
+                            <span className="material-symbols-outlined">church</span> Concluir e Rezar
+                        </button>
+                    </div>
+                </div>
+             );
+        };
+
+        // Screen 6: Ten Commandments List
+        const TenCommandments = () => {
+             const navigate = useNavigate();
+             return (
+                 <div className="relative flex flex-col min-h-screen w-full overflow-x-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark font-display antialiased text-slate-900 dark:text-white transition-colors duration-200">
+                    <header className="sticky top-0 z-50 flex items-center justify-between bg-surface-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4 py-3 border-b border-gray-200 dark:border-gray-800">
+                        <button onClick={() => navigate(-1)} className="flex items-center justify-center w-10 h-10 -ml-2 rounded-full active:bg-gray-200 dark:active:bg-gray-800 transition-colors text-slate-600 dark:text-white"><span className="material-symbols-outlined text-[24px]">arrow_back</span></button>
+                        <h2 className="text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-8">Exame de Consciência</h2>
+                    </header>
+                    <main className="flex-1 flex flex-col px-4 pb-32 pt-4">
+                        <div className="mb-6">
+                            <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white mb-2">Os Dez Mandamentos</h1>
+                            <p className="text-slate-500 dark:text-slate-400 text-base leading-relaxed">Toque em um mandamento para refletir e marcar as faltas cometidas. Seja sincero em seu coração.</p>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <details className="group flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden transition-all duration-300">
+                                <summary className="flex cursor-pointer items-center justify-between p-4 bg-inherit hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors select-none">
+                                    <div className="flex items-center gap-4"><span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary font-bold text-sm">I</span><p className="font-semibold text-sm sm:text-base pr-4">Amar a Deus sobre todas as coisas</p></div>
+                                    <span className="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform duration-300">expand_more</span>
+                                </summary>
+                                <div className="px-4 pb-4 pt-0 border-t border-transparent dark:group-open:border-gray-700/50">
+                                    <p className="text-sm text-slate-500 dark:text-slate-400 py-3 italic border-b border-gray-100 dark:border-gray-700/50 mb-2">Reflita sobre sua fé, oração e relação com o divino.</p>
+                                    <div className="flex flex-col gap-1">
+                                         <label className="flex items-start gap-3 py-2.5 cursor-pointer group/item"><input className="checkbox-custom mt-0.5 h-5 w-5 rounded border-2 border-gray-300 dark:border-slate-600 bg-transparent text-primary checked:bg-primary checked:border-primary focus:ring-0 focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/><span className="text-slate-700 dark:text-slate-200 text-sm leading-normal group-hover/item:text-primary transition-colors">Negligenciei minhas orações diárias?</span></label>
+                                    </div>
+                                </div>
+                            </details>
+                             <div onClick={() => navigate('/exam-detail')} className="group flex items-center justify-between p-4 bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                <div className="flex items-center gap-4"><span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary font-bold text-sm">VII</span><p className="font-semibold text-sm sm:text-base pr-4">Não furtar (Ver detalhes)</p></div>
+                                <span className="material-symbols-outlined text-gray-400">chevron_right</span>
+                            </div>
+                        </div>
+                    </main>
+                    <div className="fixed bottom-0 left-0 right-0 z-40 bg-surface-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 p-4 max-w-md mx-auto backdrop-blur-xl bg-opacity-90 dark:bg-opacity-90">
+                        <Link to="/report" className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span>Concluir Exame</span><span className="material-symbols-outlined text-[20px]">check</span>
+                        </Link>
+                    </div>
+                 </div>
+             );
+        };
+
+        // Screen 7: Church Commandments
+        const ChurchCommandments = () => {
+             const navigate = useNavigate();
+             return (
+                 <div className="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white">
+                    <header className="sticky top-0 z-50 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4 pb-2 border-b border-gray-200 dark:border-gray-800">
+                        <button onClick={() => navigate(-1)} aria-label="Voltar" className="flex size-10 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors text-slate-900 dark:text-white"><span className="material-symbols-outlined text-2xl">arrow_back_ios_new</span></button>
+                        <h1 className="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10">Mandamentos da Igreja</h1>
+                    </header>
+                    <div className="px-4 py-4"><p className="text-slate-600 dark:text-gray-300 text-base font-normal leading-relaxed">Reflita sobre os cinco mandamentos da Igreja para preparar seu exame de consciência. Toque para ver os detalhes.</p></div>
+                    <div className="flex-1 flex flex-col px-4 gap-3 pb-24">
+                        <details className="group flex flex-col rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300">
+                            <summary className="flex cursor-pointer items-center justify-between p-4 bg-surface-light dark:bg-surface-dark hover:bg-gray-50 dark:hover:bg-[#232d3f] transition-colors select-none">
+                                <div className="flex items-center gap-3"><div className="flex items-center justify-center size-8 rounded-full bg-primary/10 text-primary font-bold text-sm">I</div><p className="text-slate-900 dark:text-white text-base font-medium leading-normal">Participar da Missa</p></div>
+                                <span className="material-symbols-outlined text-gray-400 animate-rotate">expand_more</span>
+                            </summary>
+                            <div className="px-4 pb-4 pt-0 bg-surface-light dark:bg-surface-dark">
+                                <div className="h-px w-full bg-gray-100 dark:bg-gray-700 mb-3"></div>
+                                <p className="text-slate-500 dark:text-gray-400 text-sm italic mb-4">"Participar da Missa inteira nos domingos e festas de guarda e abster-se de trabalhos servis."</p>
+                                <div className="space-y-3">
+                                    <label className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 dark:bg-background-dark cursor-pointer group/check hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors">
+                                        <input className="mt-1 size-4 rounded border-gray-300 text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+                                        <span className="text-sm text-slate-700 dark:text-gray-300 group-hover/check:text-slate-900 dark:group-hover/check:text-white">Faltei à Missa aos domingos ou dias santos por preguiça ou negligência?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                    <div className="fixed bottom-0 left-0 right-0 p-4 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 z-40">
+                        <Link to="/report" className="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-blue-700 transition-colors shadow-lg shadow-blue-900/20 active:scale-[0.98]">
+                            <span className="truncate">Concluir Reflexão</span>
+                        </Link>
+                    </div>
+                 </div>
+             );
+        };
+
+        // Screen 8: Settings
+        const SettingsPage = () => {
+             const navigate = useNavigate();
+             return (
+                 <div className="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-white antialiased transition-colors duration-200 min-h-screen">
+                    <header className="sticky top-0 z-50 bg-background-light dark:bg-background-dark/95 backdrop-blur-md border-b border-gray-200 dark:border-border-dark">
+                        <div className="flex items-center justify-between px-4 py-3">
+                            <button onClick={() => navigate(-1)} className="flex items-center justify-center p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"><span className="material-symbols-outlined text-gray-900 dark:text-white" style={{fontSize: '24px'}}>arrow_back</span></button>
+                            <h1 className="text-lg font-bold text-center flex-1 pr-10">Configurações</h1>
+                        </div>
+                    </header>
+                    <main className="flex flex-col w-full max-w-md mx-auto p-4 pb-12 gap-6">
+                        <section>
+                            <h2 className="px-4 pb-2 pt-2 text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Exame de Consciência</h2>
+                            <div className="bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden shadow-sm border border-gray-200 dark:border-border-dark">
+                                <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-border-dark">
+                                    <div className="flex flex-col"><span className="text-base font-medium">Lembrete Diário</span><span className="text-sm text-gray-500 dark:text-gray-400">Notificar para o exame</span></div>
+                                    <label className="relative inline-flex items-center cursor-pointer"><input defaultChecked className="sr-only peer" type="checkbox"/><div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div></label>
+                                </div>
+                                <div className="p-6 flex flex-col items-center justify-center border-b border-gray-100 dark:border-border-dark bg-gray-50/50 dark:bg-[#151b26]/50">
+                                    <div className="flex items-end gap-2 mb-2">
+                                        <div className="flex flex-col items-center gap-1"><div className="bg-surface-light dark:bg-[#282e39] px-4 py-3 rounded-lg border border-gray-200 dark:border-transparent shadow-sm"><span className="text-3xl font-bold tracking-tight text-primary">21</span></div><span className="text-xs font-medium text-gray-400 uppercase">Horas</span></div>
+                                        <span className="text-2xl font-bold text-gray-400 mb-6">:</span>
+                                        <div className="flex flex-col items-center gap-1"><div className="bg-surface-light dark:bg-[#282e39] px-4 py-3 rounded-lg border border-gray-200 dark:border-transparent shadow-sm"><span className="text-3xl font-bold tracking-tight text-white dark:text-white">00</span></div><span className="text-xs font-medium text-gray-400 uppercase">Minutos</span></div>
+                                    </div>
+                                    <p className="text-xs text-center text-gray-500 max-w-[200px]">Horário definido para sua reflexão diária.</p>
+                                </div>
+                            </div>
+                        </section>
+                         <section>
+                            <h2 className="px-4 pb-2 pt-2 text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Geral</h2>
+                            <div className="bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden shadow-sm border border-gray-200 dark:border-border-dark flex flex-col divide-y divide-gray-100 dark:divide-border-dark">
+                                <button className="w-full text-left flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-[#242c3d] transition-colors"><div className="flex items-center gap-3"><span className="material-symbols-outlined text-gray-500 text-[20px]">info</span><p className="text-base font-medium">Sobre o App</p></div><span className="material-symbols-outlined text-gray-400 text-xl">chevron_right</span></button>
+                            </div>
+                        </section>
+                        <footer className="mt-4 flex flex-col items-center justify-center gap-2 text-center">
+                            <p className="text-xs text-gray-400">Versão 1.0.4</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-600 italic max-w-xs">"Cria em mim, ó Deus, um coração puro, e renova em mim um espírito reto." — Salmo 51:10</p>
+                        </footer>
+                    </main>
+                 </div>
+             );
+        };
+
+        // Shared Component: Bottom Navigation
+        const BottomNav = ({ active }) => {
+            return (
+                <nav className="fixed bottom-0 left-0 right-0 border-t border-gray-200 dark:border-[#282e39] bg-white dark:bg-[#1c1f27] px-6 py-2 pb-5 z-50">
+                    <div className="flex items-center justify-between max-w-md mx-auto">
+                        <Link to="/" className={`flex flex-1 flex-col items-center justify-center gap-1 ${active === 'home' ? 'text-primary' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'} transition-colors`}>
+                            <span className={`material-symbols-outlined ${active === 'home' ? 'fill' : ''}`}>home</span>
+                            <span className="text-[10px] font-bold tracking-wide">Início</span>
+                        </Link>
+                        <Link to="/select-guide" className={`flex flex-1 flex-col items-center justify-center gap-1 ${active === 'exam' ? 'text-primary' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'} transition-colors`}>
+                            <span className={`material-symbols-outlined ${active === 'exam' ? 'fill' : ''}`}>checklist</span>
+                            <span className="text-[10px] font-medium tracking-wide">Exame</span>
+                        </Link>
+                        <Link to="/settings" className={`flex flex-1 flex-col items-center justify-center gap-1 ${active === 'profile' ? 'text-primary' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'} transition-colors`}>
+                            <span className={`material-symbols-outlined ${active === 'profile' ? 'fill' : ''}`}>person</span>
+                            <span className="text-[10px] font-medium tracking-wide">Perfil</span>
+                        </Link>
+                    </div>
+                </nav>
+            );
+        };
+
+        // --- App Component ---
+        const App = () => {
+            return (
+                <MemoryRouter>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/select-guide" element={<SelectGuide />} />
+                        <Route path="/exam-ten-commandments" element={<TenCommandments />} />
+                        <Route path="/exam-church-commandments" element={<ChurchCommandments />} />
+                        <Route path="/exam-detail" element={<ExamDetail />} />
+                        <Route path="/notes" element={<NotesPage />} />
+                        <Route path="/report" element={<ReportPage />} />
+                        <Route path="/settings" element={<SettingsPage />} />
+                    </Routes>
+                </MemoryRouter>
+            );
+        };
+
+        // --- Mount ---
+        const root = createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
