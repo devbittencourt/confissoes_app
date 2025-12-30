@@ -1,0 +1,126 @@
+{
+  "dez_mandamentos": [
+    {
+      "mandamento": "Amar a Deus sobre todas as coisas",
+      "pecados": [
+        "Idolatria (colocar dinheiro, trabalho ou pessoas acima de Deus)",
+        "Falta de oração voluntária",
+        "Falta de confiança em Deus"
+      ]
+    },
+    {
+      "mandamento": "Não tomar seu santo nome em vão",
+      "pecados": [
+        "Blasfêmia",
+        "Juramentos falsos ou desnecessários",
+        "Uso irreverente do nome de Deus, Jesus ou dos santos"
+      ]
+    },
+    {
+      "mandamento": "Guardar domingos e festas",
+      "pecados": [
+        "Faltar à missa por negligência",
+        "Trabalhar sem necessidade em dias santos",
+        "Não santificar o domingo com repouso e oração"
+      ]
+    },
+    {
+      "mandamento": "Honrar pai e mãe",
+      "pecados": [
+        "Desobediência grave",
+        "Falta de respeito ou ingratidão",
+        "Abandono material ou afetivo dos pais"
+      ]
+    },
+    {
+      "mandamento": "Não matarás",
+      "pecados": [
+        "Ódio ou desejo de vingança",
+        "Violência física ou verbal",
+        "Indiferença ao sofrimento do próximo"
+      ]
+    },
+    {
+      "mandamento": "Não pecar contra a castidade",
+      "pecados": [
+        "Relações sexuais fora do matrimônio",
+        "Uso de pornografia",
+        "Masturbação voluntária"
+      ]
+    },
+    {
+      "mandamento": "Não furtar",
+      "pecados": [
+        "Roubo",
+        "Fraude ou desonestidade",
+        "Não devolver o que foi emprestado ou encontrado"
+      ]
+    },
+    {
+      "mandamento": "Não levantar falso testemunho",
+      "pecados": [
+        "Mentira",
+        "Calúnia",
+        "Difamação"
+      ]
+    },
+    {
+      "mandamento": "Não desejar a mulher do próximo",
+      "pecados": [
+        "Fantasias impuras consentidas",
+        "Desejo de traição",
+        "Inveja do relacionamento alheio"
+      ]
+    },
+    {
+      "mandamento": "Não cobiçar as coisas alheias",
+      "pecados": [
+        "Inveja",
+        "Avareza",
+        "Insatisfação constante com o que possui"
+      ]
+    }
+  ],
+  "mandamentos_da_igreja": [
+    {
+      "mandamento": "Ouvir missa inteira aos domingos e festas de guarda",
+      "pecados": [
+        "Faltar à missa sem motivo grave",
+        "Chegar deliberadamente atrasado",
+        "Participar sem atenção ou reverência"
+      ]
+    },
+    {
+      "mandamento": "Confessar ao menos uma vez cada ano",
+      "pecados": [
+        "Omissão prolongada da confissão",
+        "Vergonha sem esforço de superação",
+        "Falta de arrependimento verdadeiro"
+      ]
+    },
+    {
+      "mandamento": "Comungar ao menos pela Páscoa da Ressurreição",
+      "pecados": [
+        "Deixar de comungar por negligência",
+        "Comungar em pecado mortal",
+        "Desprezo pela Eucaristia"
+      ]
+    },
+    {
+      "mandamento": "Jejuar e abster-se de carne quando manda a Igreja",
+      "pecados": [
+        "Desobediência consciente às normas da Igreja",
+        "Falta de espírito de penitência",
+        "Buscar desculpas sem necessidade real"
+      ]
+    },
+    {
+      "mandamento": "Doar o dízimo segundo o costume",
+      "pecados": [
+        "Negligência no sustento da Igreja",
+        "Apego excessivo aos bens materiais",
+        "Falta de caridade com a comunidade"
+      ]
+    }
+  ]
+}
