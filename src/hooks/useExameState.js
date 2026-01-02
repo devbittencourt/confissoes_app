@@ -1,12 +1,7 @@
-import { useEffect, useState } from 'react'
-import { get, set } from '../utils/storage'
-
-const KEY = 'exame:state'
+import { useState } from 'react'
 
 export default function useExameState() {
-  const [state, setState] = useState(() => get(KEY, { perguntas: {}, notas: [] }))
-
-  useEffect(() => { set(KEY, state) }, [state])
+  const [state, setState] = useState({ perguntas: {}, notas: [] })
 
   const togglePergunta = (id) => setState((s) => ({
     ...s,
