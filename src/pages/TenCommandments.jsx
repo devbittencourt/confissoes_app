@@ -22,7 +22,7 @@ export default function TenCommandments() {
         </div>
         <div className="flex flex-col gap-4">
           {todosMandamentos.map((m) => (
-            <MandamentoBlock key={m.grupo + m.id} m={m} />
+            <MandamentoBlock key={m.uid} m={m} />
           ))}
         </div>
       </main>

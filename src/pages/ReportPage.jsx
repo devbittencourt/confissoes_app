@@ -7,10 +7,12 @@ export default function ReportPage() {
   const navigate = useNavigate()
   const pecadosMarcados = getAllWithQuantities(todosMandamentos)
   const cont = pecadosMarcados.reduce((acc, it) => {
-    acc[it.mandamentoId] = (acc[it.mandamentoId] || 0) + (it.quantidade || 0)
+    acc[it.mandamentoDisplayId] = (acc[it.mandamentoDisplayId] || 0) + (it.quantidade || 0)
     return acc
   }, {})
   const maiorLuta = Object.entries(cont).sort((a, b) => b[1] - a[1])[0]?.[0] || '—'
+  const maiorLutaMand = todosMandamentos.find((m) => m.displayId === maiorLuta)
+  const maiorLutaLabel = maiorLutaMand ? `${maiorLutaMand.displayId} — ${maiorLutaMand.titulo}` : '—'
   return (
     <div className="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark font-display">
       <div className="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-50 border-b border-gray-200 dark:border-[#282e39]">
@@ -46,7 +48,7 @@ export default function ReportPage() {
                   <div className="mt-0.5 h-2 w-2 rounded-full bg-red-500 shrink-0"></div>
                   <div className="flex flex-col">
                     <p className="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">{item.texto}</p>
-                    <p className="text-xs text-gray-500 dark:text-[#9da6b9] mt-1">Mandamento: {item.mandamentoId} — {item.mandamentoTitulo}</p>
+                    <p className="text-xs text-gray-500 dark:text-[#9da6b9] mt-1">Mandamento: {item.mandamentoDisplayId} — {item.mandamentoTitulo}</p>
                   </div>
                 </div>
                 <span className="inline-flex items-center rounded-full bg-red-500/10 dark:bg-red-500/20 px-2 py-0.5 text-xs font-medium text-red-600 dark:text-red-400">{item.quantidade}x</span>
@@ -56,7 +58,7 @@ export default function ReportPage() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="col-span-2 bg-gradient-to-br from-primary/20 to-primary/5 dark:from-primary/20 dark:to-[#1c212b] rounded-xl p-4 border border-primary/20 flex items-center justify-between">
-            <div><p className="text-primary text-xs font-bold uppercase tracking-wider mb-1">Maior Luta</p><h3 className="text-gray-900 dark:text-white text-xl font-bold">{maiorLuta}</h3><p className="text-gray-500 dark:text-[#9da6b9] text-xs mt-1">Mandamento com maior recorrência</p></div>
+            <div><p className="text-primary text-xs font-bold uppercase tracking-wider mb-1">Maior Luta</p><h3 className="text-gray-900 dark:text-white text-xl font-bold">{maiorLutaLabel}</h3><p className="text-gray-500 dark:text-[#9da6b9] text-xs mt-1">Mandamento com maior recorrência</p></div>
             <div className="bg-primary/20 p-3 rounded-full"><span className="material-symbols-outlined text-primary text-2xl">psychology</span></div>
           </div>
         </div>

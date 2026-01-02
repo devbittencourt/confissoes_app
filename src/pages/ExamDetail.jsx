@@ -5,7 +5,7 @@ import MandamentoBlock from '../components/MandamentoBlock'
 
 export default function ExamDetail() {
   const navigate = useNavigate()
-  const mVII = todosMandamentos.find((m) => m.id === 'VII')
+  const mVII = todosMandamentos.find((m) => m.displayId === 'VII')
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-x-hidden antialiased">
       <header className="sticky top-0 z-50 flex items-center justify-between bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur-md px-4 py-3 border-b border-slate-200 dark:border-slate-800 transition-colors">

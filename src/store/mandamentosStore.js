@@ -5,42 +5,42 @@ const notify = () => { listeners.forEach((fn) => fn()) }
 
 export const subscribe = (fn) => { listeners.add(fn); return () => listeners.delete(fn) }
 
-export const getItems = (mandamentoId, basePecados) => {
+export const getItems = (storeKey, basePecados) => {
   const base = basePecados.map((texto, idx) => {
     const id = `base-${idx}`
-    const entry = STORE[mandamentoId]?.[id] || {}
+    const entry = STORE[storeKey]?.[id] || {}
     return { id, texto: entry.texto ?? texto, quantidade: entry.quantidade ?? 0 }
   })
-  const custom = Object.entries(STORE[mandamentoId] || {})
+  const custom = Object.entries(STORE[storeKey] || {})
     .filter(([id]) => id.startsWith('custom-'))
     .map(([id, entry]) => ({ id, texto: entry.texto || '', quantidade: entry.quantidade || 0 }))
   return [...base, ...custom]
 }
 
-export const setTexto = (mandamentoId, id, texto) => {
-  STORE[mandamentoId] = STORE[mandamentoId] || {}
-  STORE[mandamentoId][id] = { ...(STORE[mandamentoId][id] || {}), texto }
+export const setTexto = (storeKey, id, texto) => {
+  STORE[storeKey] = STORE[storeKey] || {}
+  STORE[storeKey][id] = { ...(STORE[storeKey][id] || {}), texto }
   notify()
 }
 
-export const inc = (mandamentoId, id) => {
-  STORE[mandamentoId] = STORE[mandamentoId] || {}
-  const curr = STORE[mandamentoId][id]?.quantidade || 0
-  STORE[mandamentoId][id] = { ...(STORE[mandamentoId][id] || {}), quantidade: curr + 1 }
+export const inc = (storeKey, id) => {
+  STORE[storeKey] = STORE[storeKey] || {}
+  const curr = STORE[storeKey][id]?.quantidade || 0
+  STORE[storeKey][id] = { ...(STORE[storeKey][id] || {}), quantidade: curr + 1 }
   notify()
 }
 
-export const dec = (mandamentoId, id) => {
-  STORE[mandamentoId] = STORE[mandamentoId] || {}
-  const curr = STORE[mandamentoId][id]?.quantidade || 0
-  STORE[mandamentoId][id] = { ...(STORE[mandamentoId][id] || {}), quantidade: Math.max(0, curr - 1) }
+export const dec = (storeKey, id) => {
+  STORE[storeKey] = STORE[storeKey] || {}
+  const curr = STORE[storeKey][id]?.quantidade || 0
+  STORE[storeKey][id] = { ...(STORE[storeKey][id] || {}), quantidade: Math.max(0, curr - 1) }
   notify()
 }
 
-export const addItem = (mandamentoId, texto) => {
-  STORE[mandamentoId] = STORE[mandamentoId] || {}
+export const addItem = (storeKey, texto) => {
+  STORE[storeKey] = STORE[storeKey] || {}
   const id = `custom-${Date.now()}`
-  STORE[mandamentoId][id] = { texto, quantidade: 0 }
+  STORE[storeKey][id] = { texto, quantidade: 0 }
   notify()
   return id
 }
@@ -48,9 +48,9 @@ export const addItem = (mandamentoId, texto) => {
 export const getAllWithQuantities = (mandamentos) => {
   const result = []
   mandamentos.forEach((m) => {
-    const items = getItems(m.id, m.pecados)
+    const items = getItems(`${m.uid}`, m.pecados)
     items.filter((it) => (it.quantidade || 0) > 0).forEach((it) => {
-      result.push({ mandamentoId: m.id, mandamentoTitulo: m.titulo, texto: it.texto, quantidade: it.quantidade })
+      result.push({ mandamentoUid: m.uid, mandamentoDisplayId: m.displayId, mandamentoTitulo: m.titulo, texto: it.texto, quantidade: it.quantidade })
     })
   })
   return result
