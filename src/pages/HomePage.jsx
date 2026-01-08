@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import BottomNav from '../components/BottomNav'
 import VerseCard from '../components/VerseCard'
+import SuggestionModal from '../components/SuggestionModal'
 
 export default function HomePage() {
+  const [openSuggestion, setOpenSuggestion] = useState(true)
   return (
     <div className="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden pb-20">
       <header className="flex items-center justify-between p-4 pb-2 bg-background-light dark:bg-background-dark sticky top-0 z-10 border-b border-gray-200 dark:border-[#282e39]">
@@ -69,6 +71,7 @@ export default function HomePage() {
         <div className="h-8"></div>
       </main>
       <BottomNav active="home" />
+      <SuggestionModal open={openSuggestion} onClose={() => setOpenSuggestion(false)} />
     </div>
   )
 }
